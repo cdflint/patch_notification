@@ -128,11 +128,13 @@ $notificationArray = .\patchnotification.bat -c
 $jsonResult = Parse-PatchNotificationToJson -notificationArray $notificationArray
 
 # Send out response data to webhook
+# TODO - make webhookUrl an environment variable on the host
 $webhookUrl = 'https://prod-189.westus.logic.azure.com:443/workflows/7b8c02f32100433c8e465fc6e45ef47a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Y1O5Ge5PA8cs7x28Z_MllAadc7U1aYWWCGCqsNlmpsQ'
-# $webhookUrl = 'https://prod-126.westus.logic.azure.com:443/workflows/a4e718d79cf046a18a82b4b49cf46603/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=I9xrCFjUXK8rMBmeUdY-QL6yAhfUjeSWa3FHraet4b4'
+
 Send-PatchNotificationWebhook -parsedResult $jsonResult -webhookUrl $webhookUrl
 
 # Write-Output $jsonResult
 # $jsonResult | ConvertTo-Json -Depth 4 | Out-File -FilePath "c:/temp/notifications.json"
+
 # Move back to working dir for script
 Set-Location -Path 'c:/tools/ent_admin'
