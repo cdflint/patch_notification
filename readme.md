@@ -47,3 +47,10 @@ Get webhook URL from flow
 Make an environment variable on the machine that will run the script (PATCH_NOTIFICATION_WEBHOOK_URL) or hardcode the URL at the $webhookURL variable.
 
 Script can be ran ad-hoc or scheduled via Task Scheduler.
+
+---
+
+Example output of the Power Automate Flow as an email with available patches based on the Patch Notification output.
+
+<img src="./assets/flow_output.png" alt="Flow Output" width="600"/>
+
