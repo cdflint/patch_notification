@@ -36,7 +36,7 @@ Import
 
 Diagram of Power Automate Flow for parsing and formatting the patch notification information to send an email alert.
 
-<img src="./assets/flow_diagram.png" alt="Flow Diagram" width="600"/>
+<img src="./assets/flow_diagram.png" alt="Flow Diagram" width="100%"/>
 
 ---
 
@@ -52,5 +52,5 @@ Script can be ran ad-hoc or scheduled via Task Scheduler.
 
 Example output of the Power Automate Flow as an email with available patches based on the Patch Notification output.
 
-<img src="./assets/flow_output.png" alt="Flow Output" width="600"/>
+<img src="./assets/flow_output.png" alt="Flow Output" width="100%"/>
 
