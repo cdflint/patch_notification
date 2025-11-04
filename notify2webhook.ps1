@@ -2,7 +2,8 @@
 # Variables section, adjust as needed for implementation in your environment
 #############################################################################################
 
-# Specify the role of the ArcGIS Enterprise component 
+# Specify the role of the ArcGIS Enterprise component
+# if a machine has more than one component installed you only need to specify one role to call the patchnotification tool
 # Options: 'Portal', 'Server', 'Datastore'
 $Role = "Portal"
 
