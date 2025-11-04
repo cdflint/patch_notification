@@ -1,3 +1,18 @@
+#############################################################################################
+# Variables section, adjust as needed for implementation in your environment
+#############################################################################################
+
+# Specify the role of the ArcGIS Enterprise component 
+$Role = "Portal"
+
+# Provide your webhook URL here from Power Automate Flow or set in ENV Var
+# $webhookUrl = ''
+$webhookUrl = $env:PATCH_NOTIFICATION_WEBHOOK_URL
+
+##############################################################################################
+# Functions section
+##############################################################################################
+
 <#
 .SYNOPSIS
 Parses the output of the ArcGIS patch notification tool into a structured JSON object.
@@ -207,18 +222,7 @@ function Send-PatchNotificationWebhook {
 
 
 #############################################################################################
-# Variables section, adjust as needed for implementation in your environment
-#############################################################################################
-
-# Specify the role of the ArcGIS Enterprise component 
-$Role = "Portal"
-
-# Provide your webhook URL here from Power Automate Flow or set in ENV Var
-# $webhookUrl = ''
-$webhookUrl = $env:PATCH_NOTIFICATION_WEBHOOK_URL
-
-#############################################################################################
-# Script section
+# Main Script section
 #############################################################################################
 
 # Set proper Enterprise path based on role
