@@ -69,6 +69,9 @@ function Parse-PatchNotificationToJson {
     )
 
     $result = @{
+        MachineName = $env:COMPUTERNAME
+        FQDN = [System.Net.Dns]::GetHostByName($env:computerName).HostName
+        IPV4 = [System.Net.Dns]::GetHostByName($env:computerName).AddressList.IPAddressToString
         InstalledComponents = @{}
         AvailableUpdates = @{
             "ArcGIS Data Store" = @()
@@ -207,32 +210,50 @@ function Send-PatchNotificationWebhook {
 # Variables section, adjust as needed for implementation in your environment
 #############################################################################################
 
-# Path to your ArcGIS Enterprise installation
-$EnterprisePath = 'C:\Program Files\ArcGIS\Portal'
-
-# Path to this scripts parent directory
-$toolPath = 'c:\tools\'
+# Specify the role of the ArcGIS Enterprise component 
+$Role = "Portal"
 
 # Provide your webhook URL here from Power Automate Flow or set in ENV Var
 # $webhookUrl = ''
 $webhookUrl = $env:PATCH_NOTIFICATION_WEBHOOK_URL
 
-
 #############################################################################################
 # Script section
 #############################################################################################
 
-# Move to Patch notification dir and run a check
-Set-Location -Path "$($EnterprisePath)\tools\patchnotification\" # Set to run in Portal tools dir
-$notificationArray = .\patchnotification.bat -c
-$jsonResult = Parse-PatchNotificationToJson -notificationArray $notificationArray
+# Set proper Enterprise path based on role
+switch ($Role) {
+    "Portal" { $EnterprisePath = 'C:\Program Files\ArcGIS\Portal' }
+    "Server" { $EnterprisePath = 'C:\Program Files\ArcGIS\Server' }
+    "DataStore" { $EnterprisePath = 'C:\Program Files\ArcGIS\Datastore' }
+    Default { throw "Invalid Role specified. Use 'Portal', 'Server', or 'Datastore'." }
+}
 
-# Send out response data to webhook
-Send-PatchNotificationWebhook -parsedResult $jsonResult -webhookUrl $webhookUrl
 
-# For debugging purposes in Powershell
-# Write-Output $jsonResult
-# $jsonResult | ConvertTo-Json -Depth 4 | Out-File -FilePath "$($toolPath)/notifications.json"
+try {
+    # Path to this scripts parent directory
+    $toolPath = Get-Location
 
-# Move back to working dir for script
-Set-Location -Path $toolPath
+    # Change to the Patch notification tool directory
+    Set-Location -Path "$($EnterprisePath)\tools\patchnotification\" # Set to run in Portal tools dir
+
+    # Run patch notification tool and capture output
+    $notificationArray = .\patchnotification.bat -c
+    $jsonResult = Parse-PatchNotificationToJson -notificationArray $notificationArray
+
+    # Send out response data to webhook
+    Send-PatchNotificationWebhook -parsedResult $jsonResult -webhookUrl $webhookUrl
+
+    # For debugging purposes in Powershell
+    # Write-Output $jsonResult
+    # $jsonResult | ConvertTo-Json -Depth 4 | Out-File -FilePath "$($toolPath)/notifications.json"
+
+    # Move back to working dir for script
+    Set-Location -Path $toolPath
+    exit 0
+}
+catch {
+    <#Do this if a terminating exception happens#>
+    Write-Host "An error occurred: $($_.Exception.Message)"
+    exit 1
+}
