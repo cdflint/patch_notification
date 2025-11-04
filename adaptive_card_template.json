@@ -1,0 +1,281 @@
+{
+    "type": "AdaptiveCard",
+    "speak": "ArcGIS Enterprise Patch Notification",
+    "body": [
+        {
+            "inlines": [
+                {
+                    "type": "TextRun",
+                    "size": "Small",
+                    "text": "ArcGIS Enterprise Patch Check",
+                    "selectAction": {
+                        "url": "https://support.esri.com/en-us/patches-updates",
+                        "type": "Action.OpenUrl"
+                    }
+                }
+            ],
+            "type": "RichTextBlock"
+        },
+        {
+            "columns": [
+                {
+                    "width": "auto",
+                    "items": [
+                        {
+                            "type": "Icon",
+                            "name": "Alert",
+                            "color": "Accent"
+                        }
+                    ],
+                    "type": "Column"
+                },
+                {
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "size": "Large",
+                            "text": "Patches Available",
+                            "weight": "Bolder",
+                            "wrap": true,
+                            "type": "TextBlock"
+                        }
+                    ],
+                    "verticalContentAlignment": "Center",
+                    "spacing": "Small",
+                    "type": "Column"
+                }
+            ],
+            "spacing": "Small",
+            "type": "ColumnSet"
+        },
+        {
+            "type": "Table",
+            "targetWidth": "AtLeast:Narrow",
+            "columns": [
+                {
+                    "width": 1
+                },
+                {
+                    "width": 2
+                }
+            ],
+            "rows": [
+                {
+                    "type": "TableRow",
+                    "cells": [
+                        {
+                            "type": "TableCell",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Machine Name",
+                                    "wrap": true,
+                                    "weight": "Bolder"
+                                }
+                            ],
+                            "verticalContentAlignment": "Center"
+                        },
+                        {
+                            "type": "TableCell",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "@{triggerBody()?['MachineName']}",
+                                    "wrap": true
+                                }
+                            ],
+                            "verticalContentAlignment": "Center"
+                        }
+                    ]
+                },
+                {
+                    "type": "TableRow",
+                    "cells": [
+                        {
+                            "type": "TableCell",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "FQDN",
+                                    "wrap": true,
+                                    "weight": "Bolder"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "TableCell",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "@{triggerBody()?['FQDN']}",
+                                    "wrap": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "TableRow",
+                    "cells": [
+                        {
+                            "type": "TableCell",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "IP Address",
+                                    "wrap": true,
+                                    "weight": "Bolder"
+                                }
+                            ],
+                            "verticalContentAlignment": "Center"
+                        },
+                        {
+                            "type": "TableCell",
+                            "items": [
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "stretch",
+                                            "items": [
+                                                {
+                                                    "color": "Default",
+                                                    "text": "@{triggerBody()?['IPV4']}",
+                                                    "wrap": true,
+                                                    "spacing": "Small",
+                                                    "type": "TextBlock"
+                                                }
+                                            ],
+                                            "spacing": "Small"
+                                        }
+                                    ],
+                                    "spacing": "Small"
+                                }
+                            ],
+                            "verticalContentAlignment": "Center"
+                        }
+                    ]
+                },
+                {
+                    "type": "TableRow",
+                    "cells": [
+                        {
+                            "type": "TableCell",
+                            "verticalContentAlignment": "Center"
+                        },
+                        {
+                            "type": "TableCell"
+                        }
+                    ]
+                }
+            ],
+            "firstRowAsHeaders": false,
+            "showGridLines": false
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "Server Patches Available",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "Release Date",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "@{items('for_each_Data_Store_Patch')?['releaseDate']}",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "URL",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "@{items('for_each_Data_Store_Patch')?['url']}",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "Description",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "@{items('for_each_Data_Store_Patch')?['description']}",
+                    "wrap": true
+                },
+
+            ]
+        },
+
+
+  
+        {
+            "type": "Container",
+            "targetWidth": "VeryNarrow",
+            "items": [
+                {
+                    "text": "Machine Name",
+                    "weight": "Bolder",
+                    "wrap": true,
+                    "type": "TextBlock"
+                },
+                {
+                    "text": "@{triggerBody()?['MachineName']}",
+                    "wrap": true,
+                    "type": "TextBlock",
+                    "spacing": "None"
+                },
+                {
+                    "text": "FQDN",
+                    "weight": "Bolder",
+                    "wrap": true,
+                    "spacing": "Small",
+                    "type": "TextBlock"
+                },
+                {
+                    "text": "@{triggerBody()?['FQDN']}",
+                    "wrap": true,
+                    "spacing": "None",
+                    "type": "TextBlock"
+                },
+                {
+                    "text": "IP Address",
+                    "weight": "Bolder",
+                    "wrap": true,
+                    "spacing": "Small",
+                    "type": "TextBlock"
+                },
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "color": "Default",
+                                    "text": "@{triggerBody()?['IPV4']}",
+                                    "wrap": true,
+                                    "spacing": "Small",
+                                    "type": "TextBlock"
+                                }
+                            ],
+                            "spacing": "Small"
+                        }
+                    ],
+                    "spacing": "None"
+                }
+            ]
+        }
+    ],
+    "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.5"
+}
