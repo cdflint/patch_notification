@@ -3,6 +3,7 @@
 #############################################################################################
 
 # Specify the role of the ArcGIS Enterprise component 
+# Options: 'Portal', 'Server', 'Datastore'
 $Role = "Portal"
 
 # Provide your webhook URL here from Power Automate Flow or set in ENV Var
