@@ -24,19 +24,15 @@ Begin import setup
 
 - Import Setup
 
->- Name: Http -> Send an email (v2)
->- Create as new
->- Provide Resource Name
-
->- Name: Mail
->- Select during import
->- Create new mail connection
-
 Import
 
-Diagram of Power Automate Flow for parsing and formatting the patch notification information to send an email alert.
+Example diagram of Power Automate Flow for parsing and formatting the patch notification information to send an email alert.
 
 <img src="./assets/flow_diagram.png" alt="Flow Diagram" width="100%"/>
+
+Example diagram of Power Automate Flow for sending adaptive cards to Microsoft Teams.
+
+<img src="./assets/flow_diagram_teams.png" alt="Flow Teams Diagram" width="100%"/>
 
 ---
 
@@ -50,7 +46,6 @@ Script can be ran ad-hoc or scheduled via Task Scheduler.
 
 ---
 
-Example output of the Power Automate Flow as an email with available patches based on the Patch Notification output.
+Example output in MS Teams with adaptive cards
 
-<img src="./assets/flow_output.png" alt="Flow Output" width="100%"/>
-
+<img src="./assets/teams_output.png" alt="Teams Adaptive Card" width="50%"/>
