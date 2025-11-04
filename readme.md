@@ -40,6 +40,13 @@ Get webhook URL from flow
 
 - Held in the manual element at the top of the flow.
 
+End user assignable variables are at the top of the `notify2webhook.ps1` script.
+
+Specify a `Role` that matches one of the components installed on the machine the script will run on. Options are:
+- Portal
+- Server
+- Datastore
+
 Make an environment variable on the machine that will run the script (PATCH_NOTIFICATION_WEBHOOK_URL) or hardcode the URL at the $webhookURL variable.
 
 Script can be ran ad-hoc or scheduled via Task Scheduler.
