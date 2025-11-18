@@ -90,11 +90,7 @@ function Parse-PatchNotificationToJson {
         FQDN = [System.Net.Dns]::GetHostByName($env:computerName).HostName
         IPV4 = [System.Net.Dns]::GetHostByName($env:computerName).AddressList.IPAddressToString
         InstalledComponents = @{}
-        AvailableUpdates = @{
-            "ArcGIS Data Store" = @()
-            "ArcGIS Server" = @()
-            "Portal for ArcGIS" = @()
-        }
+        AvailableUpdates = @()
         InstalledPatches = @()
     }
 
@@ -133,23 +129,29 @@ function Parse-PatchNotificationToJson {
                         $currentComponent = $matches[1].Trim()
                     } elseif ($line -match "^\s*-\s*(.+?)\s*$") {
                         $update = $matches[1].Trim()
-                        $result.AvailableUpdates[$currentComponent] += @{
+                        $result.AvailableUpdates += @{
+                            "component" = $currentComponent
                             "description" = $update
                         }
                     } elseif ($line -match "^\s*(https?://\S+)\s*$") {
                         $url = $matches[1].Trim()
-                        $result.AvailableUpdates[$currentComponent][-1]["url"] = $url
+                        $result.AvailableUpdates[-1]["url"] = $url
                     } elseif ($line -match "^\s*Release Date:\s*(.+?)\s*$") {
                         $releaseDate = $matches[1].Trim()
-                        $result.AvailableUpdates[$currentComponent][-1]["releaseDate"] = $releaseDate
+                        $result.AvailableUpdates[-1]["releaseDate"] = $releaseDate
                     } elseif ($line -match "^\s*\(no updates available\)\s*$") {
-                        $result.AvailableUpdates[$currentComponent] += @{
-                            "description" = "no updates available"
-                        }
+                        # Skip "no updates available" entries
+                        continue
                     }
                 } elseif ($currentSection -eq "InstalledPatches") {
                     if ($line -match "^\s*\(none\)\s*$") {
                         $result.InstalledPatches = @("none")
+                    } else {
+                        # Handle actual installed patches if they exist
+                        $patchLine = $line.Trim()
+                        if ($patchLine -ne "" -and $patchLine -notmatch "^To browse") {
+                            $result.InstalledPatches += $patchLine
+                        }
                     }
                 }
             }
@@ -178,27 +180,31 @@ String
 The JSON payload that was sent to the webhook.
 
 .EXAMPLE
-$parsedResult = @{
-    InstalledComponents = @{
-        "ArcGIS Data Store" = "11.4"
-        "ArcGIS Server" = "11.4"
-        "Portal for ArcGIS" = "11.4"
-    }
-    AvailableUpdates = @{
-        "ArcGIS Data Store" = @(
-            @{
-                description = "no updates available"
-            }
-        )
-        "ArcGIS Server" = @(
-            @{
-                description = "ArcGIS Server 11.4 Spatial Analysis Patch"
-                url = "https://support.esri.com/en-us/patches-updates/2024/arcgis-server-11-4-spatial-analysis-patch"
-                releaseDate = "11/25/24"
-            }
-        )
-    }
-    InstalledPatches = @("none")
+{
+    "InstalledPatches":  [
+                             "none",
+                             "http://support.esri.com/Downloads"
+                         ],
+    "FQDN":  "GBDSL000263-ptl.esri.com",
+    "MachineName":  "GBDSL000263-PTL",
+    "AvailableUpdates":  [
+                             {
+                                 "url":  "https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-11-5-web-applications-patch",
+                                 "description":  "Portal for ArcGIS 11.5 Web Applications Patch",
+                                 "component":  "Portal for ArcGIS",
+                                 "releaseDate":  "8/6/25"
+                             },
+                             {
+                                 "url":  "https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-mission-manager-location-services-and-projection-patch",
+                                 "description":  "Portal for ArcGIS Mission Manager Location Services and Projection Patch",
+                                 "component":  "Portal for ArcGIS",
+                                 "releaseDate":  "10/16/25"
+                             }
+                         ],
+    "IPV4":  "10.44.102.41",
+    "InstalledComponents":  {
+                                "Portal for ArcGIS":  "11.5"
+                            }
 }
 
 $webhookUrl = "https://example.com/webhook"
