@@ -26,10 +26,6 @@ Begin import setup
 
 Import
 
-Example diagram of Power Automate Flow for parsing and formatting the patch notification information to send an email alert.
-
-<img src="./assets/flow_diagram.png" alt="Flow Diagram" width="100%"/>
-
 Example diagram of Power Automate Flow for sending adaptive cards to Microsoft Teams.
 
 <img src="./assets/flow_diagram_teams.png" alt="Flow Teams Diagram" width="100%"/>
