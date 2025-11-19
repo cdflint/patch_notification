@@ -208,7 +208,7 @@
                                 {
                                     "type": "TextBlock",
                                     "wrap": true,
-                                    "text": "Available Patches",
+                                    "text": "Available Patch",
                                     "size": "Large",
                                     "weight": "Bolder"
                                 }
@@ -303,7 +303,11 @@
                                 {
                                     "type": "TextBlock",
                                     "text": "@{body('Parse_JSON')?['url']}",
-                                    "wrap": true
+                                    "wrap": true,
+                                    "selectAction": {
+                                        "url": "@{body('Parse_JSON')?['url']}",
+                                        "type": "Action.OpenUrl"
+                                    }
                                 }
                             ]
                         }
@@ -332,7 +336,11 @@
                                 {
                                     "type": "TextBlock",
                                     "text": "@{body('Parse_JSON')?['description']}",
-                                    "wrap": true
+                                    "wrap": true,
+                                    "selectAction": {
+                                        "url": "@{body('Parse_JSON')?['url']}",
+                                        "type": "Action.OpenUrl"
+                                    }
                                 }
                             ]
                         }
@@ -378,7 +386,11 @@
                 {
                     "type": "TextBlock",
                     "text": "@{body('Parse_JSON')?['url']}",
-                    "wrap": true
+                    "wrap": true,
+                    "selectAction": {
+                        "url": "@{body('Parse_JSON')?['url']}",
+                        "type": "Action.OpenUrl"
+                    }
                 },
                 {
                     "type": "TextBlock",
@@ -390,7 +402,11 @@
                 {
                     "type": "TextBlock",
                     "text": "@{body('Parse_JSON')?['description']}",
-                    "wrap": true
+                    "wrap": true,
+                    "selectAction": {
+                        "url": "@{body('Parse_JSON')?['url']}",
+                        "type": "Action.OpenUrl"
+                    }
                 }
             ],
             "targetWidth": "VeryNarrow"
