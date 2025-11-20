@@ -141,7 +141,7 @@
                     ]
                 }
             ],
-            "targetWidth": "AtLeast:Narrow"
+            "targetWidth": "AtLeast:Standard"
         },
         {
             "type": "Container",
@@ -183,7 +183,7 @@
                     "wrap": true
                 }
             ],
-            "targetWidth": "VeryNarrow"
+            "targetWidth": "AtMost:Narrow"
         },
         {
             "type": "Container",
@@ -280,7 +280,6 @@
                         }
                     ]
                 },
-                
                 {
                     "type": "ColumnSet",
                     "columns": [
@@ -349,7 +348,7 @@
                     ]
                 }
             ],
-            "targetWidth": "AtLeast:Narrow"
+            "targetWidth": "AtLeast:Standard"
         },
         {
             "type": "Container",
@@ -378,7 +377,6 @@
                     "text": "@{body('Parse_JSON')?['releaseDate']}",
                     "wrap": true
                 },
-                
                 {
                     "type": "TextBlock",
                     "text": "Description",
@@ -409,7 +407,7 @@
                     }
                 }
             ],
-            "targetWidth": "VeryNarrow"
+            "targetWidth": "AtMost:Narrow"
         }
     ]
 }
