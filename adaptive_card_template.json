@@ -58,7 +58,7 @@
                     "columns": [
                         {
                             "type": "Column",
-                            "width": "auto",
+                            "width": 11,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -71,7 +71,7 @@
                         },
                         {
                             "type": "Column",
-                            "width": "auto",
+                            "width": 35,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -87,7 +87,7 @@
                     "columns": [
                         {
                             "type": "Column",
-                            "width": "auto",
+                            "width": 11,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -100,7 +100,7 @@
                         },
                         {
                             "type": "Column",
-                            "width": "auto",
+                            "width": 35,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -116,7 +116,7 @@
                     "columns": [
                         {
                             "type": "Column",
-                            "width": "auto",
+                            "width": 11,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -129,7 +129,7 @@
                         },
                         {
                             "type": "Column",
-                            "width": "auto",
+                            "width": 35,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -227,7 +227,7 @@
                     "columns": [
                         {
                             "type": "Column",
-                            "width": "auto",
+                            "width": 11,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -240,7 +240,7 @@
                         },
                         {
                             "type": "Column",
-                            "width": "stretch",
+                            "width": 35,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -256,7 +256,7 @@
                     "columns": [
                         {
                             "type": "Column",
-                            "width": "auto",
+                            "width": 11,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -269,7 +269,7 @@
                         },
                         {
                             "type": "Column",
-                            "width": "stretch",
+                            "width": 35,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -280,45 +280,13 @@
                         }
                     ]
                 },
+                
                 {
                     "type": "ColumnSet",
                     "columns": [
                         {
                             "type": "Column",
-                            "width": "auto",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "URL",
-                                    "wrap": true,
-                                    "size": "Medium",
-                                    "weight": "Bolder"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "stretch",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "@{body('Parse_JSON')?['url']}",
-                                    "wrap": true,
-                                    "selectAction": {
-                                        "url": "@{body('Parse_JSON')?['url']}",
-                                        "type": "Action.OpenUrl"
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "ColumnSet",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "auto",
+                            "width": 11,
                             "items": [
                                 {
                                     "type": "TextBlock",
@@ -331,16 +299,50 @@
                         },
                         {
                             "type": "Column",
-                            "width": "stretch",
+                            "width": 35,
                             "items": [
                                 {
                                     "type": "TextBlock",
                                     "text": "@{body('Parse_JSON')?['description']}",
+                                    "wrap": true
+                                }
+                            ],
+                            "selectAction": {
+                                "url": "@{body('Parse_JSON')?['url']}",
+                                "type": "Action.OpenUrl"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": 11,
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Link",
                                     "wrap": true,
+                                    "size": "Medium",
+                                    "weight": "Bolder"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": 35,
+                            "items": [
+                                {
+                                    "type": "Icon",
+                                    "name": "Link",
                                     "selectAction": {
-                                        "url": "@{body('Parse_JSON')?['url']}",
-                                        "type": "Action.OpenUrl"
-                                    }
+                                        "type": "Action.OpenUrl",
+                                        "url": "@{body('Parse_JSON')?['url']}"
+                                    },
+                                    "size": "Small",
+                                    "color": "Accent"
                                 }
                             ]
                         }
@@ -376,22 +378,7 @@
                     "text": "@{body('Parse_JSON')?['releaseDate']}",
                     "wrap": true
                 },
-                {
-                    "type": "TextBlock",
-                    "text": "URL",
-                    "wrap": true,
-                    "size": "Medium",
-                    "weight": "Bolder"
-                },
-                {
-                    "type": "TextBlock",
-                    "text": "@{body('Parse_JSON')?['url']}",
-                    "wrap": true,
-                    "selectAction": {
-                        "url": "@{body('Parse_JSON')?['url']}",
-                        "type": "Action.OpenUrl"
-                    }
-                },
+                
                 {
                     "type": "TextBlock",
                     "text": "Description",
@@ -402,7 +389,20 @@
                 {
                     "type": "TextBlock",
                     "text": "@{body('Parse_JSON')?['description']}",
+                    "wrap": true
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "Link",
                     "wrap": true,
+                    "size": "Medium",
+                    "weight": "Bolder"
+                },
+                {
+                    "type": "Icon",
+                    "name": "Link",
+                    "size": "Small",
+                    "color": "Accent",
                     "selectAction": {
                         "url": "@{body('Parse_JSON')?['url']}",
                         "type": "Action.OpenUrl"
