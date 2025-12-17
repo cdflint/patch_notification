@@ -18,7 +18,7 @@ Open Power Automate and navigate to My Flows.
 
 Import package (Legacy)
 
-- Select the patch_notification_flow.zip file from the local directory and import to Power Automate.
+- Select the latest patch_notification_TIMESTAMP.zip file from the local directory and import to Power Automate.
 
 Begin import setup
 
