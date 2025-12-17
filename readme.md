@@ -1,6 +1,6 @@
 # Patch Notification Alerts
 
-v1.0.0
+v1.0.1
 
 ---
 
@@ -14,17 +14,17 @@ Parse output and leverage a Power Automate Flow to send an email alert when a ne
 
 Download the repo and extract the contents to a local directory.
 
-Navigate to Power Automate go to My Flows.
+Open Power Automate and navigate to My Flows.
 
 Import package (Legacy)
 
-- Select the patch_notification_flow.zip file and import to Power Automate.
+- Select the patch_notification_flow.zip file from the local directory and import to Power Automate.
 
 Begin import setup
 
 - Import Setup
 
-Import
+Import and configure with ArcGIS Connector and your desired Trigger format if not using a manual trigger as the example below.
 
 Example diagram of Power Automate Flow for sending adaptive cards to Microsoft Teams.
 
